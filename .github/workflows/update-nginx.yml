@@ -1,0 +1,22 @@
+name: Update nginx
+on:
+  workflow_run:
+    workflows: ['Make pull']
+    types:
+      - completed
+
+jobs:
+  update-nginx:
+    name: Update nginx
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update nginx
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.IP }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: |
+            sudo cp ~/university-nginx/nginx.conf /etc/nginx/nginx.conf
+            sudo systemctl reload nginx

@@ -18,5 +18,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 666
           script: |
-            echo '${{ secrets.PASSWORD }}' | sudo -S cp ~/university-nginx/nginx.conf /etc/nginx/nginx.conf
-            echo '${{ secrets.PASSWORD }}' | sudo -S systemctl reload nginx
+            sudo cp ~/university-nginx/nginx.conf /etc/nginx/nginx.conf
+            sudo systemctl reload nginx
